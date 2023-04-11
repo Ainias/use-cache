@@ -1,3 +1,3 @@
-import React from 'react';
-export declare const ReloadContext: React.Context<number>;
+/// <reference types="react" />
+export declare const ReloadContext: import("react").Context<number>;
 export declare function useReloadId(): number;

@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import  { createContext, useRef } from 'react';
 
-export const ReloadContext = React.createContext<number>(1);
+
+export const ReloadContext = createContext<number>(1);
 
 let nextId = 2;
 

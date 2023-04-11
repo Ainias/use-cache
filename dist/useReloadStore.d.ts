@@ -26,17 +26,7 @@ declare const actionsGenerator: (set: SetState, get: GetState) => {
     removeListener(key: LoadingKey, containerKey: number): void;
     reloadContainer(containerKey: number): Promise<any[]>;
 };
-export declare const useReloadStore: import("zustand").UseBoundStore<Omit<Omit<import("zustand").StoreApi<ReloadStoreState>, "persist"> & {
-    persist: {
-        setOptions: (options: Partial<import("zustand/middleware").PersistOptions<ReloadStoreState, ReloadStoreState>>) => void;
-        clearStorage: () => void;
-        rehydrate: () => void | Promise<void>;
-        hasHydrated: () => boolean;
-        onHydrate: (fn: (state: ReloadStoreState) => void) => () => void;
-        onFinishHydration: (fn: (state: ReloadStoreState) => void) => () => void;
-        getOptions: () => Partial<import("zustand/middleware").PersistOptions<ReloadStoreState, ReloadStoreState>>;
-    };
-}, "setState"> & {
+export declare const useReloadStore: import("zustand").UseBoundStore<Omit<import("zustand").StoreApi<ReloadStoreState>, "setState"> & {
     setState(nextStateOrUpdater: ReloadStoreState | Partial<ReloadStoreState> | ((state: import("immer/dist/internal").WritableDraft<ReloadStoreState>) => void), shouldReplace?: boolean): void;
 }>;
 export {};

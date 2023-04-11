@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "target": "es2017",
+    "target": "es6",
     "alwaysStrict": true,
-    "lib": ["es5", "es2015.promise", "dom", "es2015", "es6", "es2017"],
+    "lib": ["es5", "es2015.promise", "dom", "es2015", "es6"],
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

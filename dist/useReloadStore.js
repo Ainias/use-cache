@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useReloadStore = void 0;
 const zustand_1 = require("zustand");
-const middleware_1 = require("zustand/middleware");
 const immer_1 = require("zustand/middleware/immer");
 const js_helper_1 = require("@ainias42/js-helper");
 const initialState = {
@@ -16,9 +15,9 @@ const actionsGenerator = (set, get) => ({
     },
     generateKey() {
         let currentKey = get().lastKey;
-        while (get().reloadItems[currentKey]) {
+        do {
             currentKey++;
-        }
+        } while (get().reloadItems[currentKey]);
         set({ lastKey: currentKey });
         return currentKey;
     },
@@ -75,8 +74,5 @@ const actionsGenerator = (set, get) => ({
         return Promise.all(js_helper_1.ObjectHelper.keys((_a = containers[containerKey]) !== null && _a !== void 0 ? _a : {}).map((key) => { var _a; return (_a = reloadItems[key]) === null || _a === void 0 ? void 0 : _a.reloadFunction().catch((e) => console.error('Reloading container error: ', e)); }));
     },
 });
-exports.useReloadStore = (0, zustand_1.default)()((0, middleware_1.persist)((0, immer_1.immer)((set, get) => (Object.assign(Object.assign({}, initialState), actionsGenerator(set, get)))), {
-    name: 'ReloadStore',
-    version: 0,
-}));
+exports.useReloadStore = (0, zustand_1.create)()((0, immer_1.immer)((set, get) => (Object.assign(Object.assign({}, initialState), actionsGenerator(set, get)))));
 //# sourceMappingURL=useReloadStore.js.map

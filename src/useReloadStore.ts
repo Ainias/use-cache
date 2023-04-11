@@ -1,4 +1,4 @@
-import create from 'zustand';
+import {create} from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ReloadFunctionWithoutLoadingState } from './useReloadable';
 import { immer } from 'zustand/middleware/immer';
@@ -37,9 +37,9 @@ const actionsGenerator = (set: SetState, get: GetState) => ({
     },
     generateKey() {
         let currentKey = get().lastKey;
-        while (get().reloadItems[currentKey]) {
+        do {
             currentKey++;
-        }
+        }while (get().reloadItems[currentKey]);
         set({ lastKey: currentKey });
         return currentKey;
     },
@@ -100,14 +100,8 @@ const actionsGenerator = (set: SetState, get: GetState) => ({
 });
 
 export const useReloadStore = create<ReloadStoreState>()(
-    persist(
         immer((set, get) => ({
             ...initialState,
             ...actionsGenerator(set, get),
-        })),
-        {
-            name: 'ReloadStore',
-            version: 0,
-        }
-    )
+        }))
 );

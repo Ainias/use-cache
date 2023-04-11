@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useReloadable = void 0;
 const react_1 = require("react");
@@ -29,16 +38,16 @@ function useReloadable(keyOrFunc, funcOrLoadingState, maybeInitialLoadingState) 
             loadingState: initialLoadingState,
             isRunning: false,
             listenerCount: 0,
-            reloadFunction: async () => {
+            reloadFunction: () => __awaiter(this, void 0, void 0, function* () {
                 // Prevent double running or running when no one waits
                 const currentEntry = useReloadStore_1.useReloadStore.getState().reloadItems[keyRef.current];
                 if ((currentEntry === null || currentEntry === void 0 ? void 0 : currentEntry.isRunning) || !(currentEntry === null || currentEntry === void 0 ? void 0 : currentEntry.listenerCount)) {
                     return;
                 }
                 setIsRunning(keyRef.current, true, initialLoadingState);
-                await reloadFunction(setLoadingStateInner);
+                yield reloadFunction(setLoadingStateInner);
                 setIsRunning(keyRef.current, false);
-            },
+            }),
         };
         setItem(entry);
     }
