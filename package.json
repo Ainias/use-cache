@@ -1,6 +1,6 @@
 {
   "name": "@ainias42/use-reload",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "one reload on many ",
   "main": "dist/index.js",
   "scripts": {
